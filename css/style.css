@@ -1,0 +1,70 @@
+/* Base Styles */
+body { margin: 0; overflow-x: hidden; background-color: #05050A; color: white; }
+
+#webgl-container {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #05050A 60%);
+}
+
+.glass-nav { background: rgba(5, 5, 10, 0.4); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+.glass-pill { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(180, 144, 255, 0.2); backdrop-filter: blur(10px); }
+.text-glow { text-shadow: 0 0 40px rgba(180, 144, 255, 0.4); }
+
+/* 3D Animated Text Typewriter */
+.perspective-text { perspective: 1000px; transform-style: preserve-3d; }
+.letter-3d {
+    display: inline-block; opacity: 0; transform: translateZ(-300px) rotateX(90deg) scale(0.5);
+    animation: popIn3D 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes popIn3D {
+    0% { opacity: 0; transform: translateZ(-300px) rotateX(90deg) scale(0.5); filter: blur(8px); }
+    100% { opacity: 1; transform: translateZ(0) rotateX(0deg) scale(1); filter: blur(0px); text-shadow: 0 0 15px rgba(96, 165, 250, 0.8), 0 0 30px rgba(180, 144, 255, 0.5); }
+}
+
+/* ========================================= */
+/* NEW: FUTURISTIC 6-SLOT IMAGE CAROUSEL     */
+/* ========================================= */
+.perspective-container {
+    perspective: 1500px;
+    transform-style: preserve-3d;
+}
+
+/* The Futuristic "Cyber Frame" Container */
+.cyber-frame {
+    position: absolute;
+    width: 90%;
+    height: 80%;
+    border-radius: 12px;
+    background: rgba(180, 144, 255, 0.05);
+    border: 1px solid rgba(180, 144, 255, 0.2);
+    box-shadow: 0 0 25px rgba(180, 144, 255, 0.1), inset 0 0 20px rgba(180, 144, 255, 0.1);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Glowing Sci-Fi Corner Brackets */
+.cyber-frame::before, .cyber-frame::after {
+    content: ''; position: absolute; width: 40px; height: 40px;
+    border: 2px solid #B490FF; transition: all 0.5s; z-index: 20; pointer-events: none;
+}
+.cyber-frame::before { top: -1px; left: -1px; border-right: none; border-bottom: none; border-top-left-radius: 12px; }
+.cyber-frame::after { bottom: -1px; right: -1px; border-left: none; border-top: none; border-bottom-right-radius: 12px; }
+
+/* Images inside the frame */
+.cyber-frame img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 10px;
+    opacity: 0.5; mix-blend-mode: luminosity; /* Gives background images a cool desaturated cyber look */
+    transition: all 0.8s;
+}
+
+/* 6-Slot Coverflow Positions */
+.card-active { transform: translateX(0) translateZ(0) rotateY(0deg); z-index: 10; box-shadow: 0 0 50px rgba(180,144,255,0.5); border-color: rgba(180,144,255,0.8); }
+.card-active img { opacity: 1; mix-blend-mode: normal; } /* Active image is fully colored */
+
+.card-next-1 { transform: translateX(50%) translateZ(-150px) rotateY(-30deg); z-index: 5; }
+.card-prev-1 { transform: translateX(-50%) translateZ(-150px) rotateY(30deg); z-index: 5; }
+
+.card-next-2 { transform: translateX(85%) translateZ(-300px) rotateY(-45deg); z-index: 3; opacity: 0.6; }
+.card-prev-2 { transform: translateX(-85%) translateZ(-300px) rotateY(45deg); z-index: 3; opacity: 0.6; }
+
+.card-hidden { transform: translateX(0) translateZ(-500px) rotateY(0deg); z-index: 1; opacity: 0; }
